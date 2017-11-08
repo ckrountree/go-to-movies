@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 
+const API_KEY = process.env.REACT_APP_API_KEY;
+
 class App extends Component {
   constructor() {
     super();
@@ -32,16 +34,38 @@ class App extends Component {
   }
 
   render() {
+    const { search, movies, loading } = this.state;
+    const choices = ['title', 'plot', 'release year'];
+
+    const list = (
+      <ul>
+        {movies.map(item => <li key={item.name}>{item.name}</li>)}
+      </ul>
+    );
+
+    const load = <div>Loading...</div>;
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={'./camera.png'} alt="" />
-          <h1 className="App-title">Roll That Footage</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <section>
+        <div className="App">
+          <header className="App-header">
+            <img src={'./camera.png'} alt="" />
+            <h1 className="App-title">Roll That Footage</h1>
+          </header>
+        </div>
+
+        <div>
+          {choices.map(choice => {
+            return <button key={choice} disabled={choice === search}
+              onClick={() => this.changeSearch(choice)}
+            >
+              {choice}
+            </button>;
+          })}
+          <div>{movies.length} {search}</div>
+          {loading ? load : list}
+        </div>
+      </section>
     );
   }
 }
