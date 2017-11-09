@@ -33,6 +33,11 @@ h1 {
   font-size: 100px;
 }
 
+P {
+  font-size: 12px;
+  text-align: center;
+}
+
 ul {
   list-style-type: none;
   display: flex;
@@ -51,8 +56,9 @@ li {
 } 
 
 .search-label {
-  position: relative;
-  margin-left: 50px;
+  width: 70em;
+  margin-right: 1em;
+  text-align: right;
 }
 
 .submit {
@@ -60,6 +66,13 @@ li {
   color: black;
 }
 
+.reel img {
+  margin-left: 0.5cm;
+  width: 5%;
+}
+
 .flexbox img {
   height: 50%;
+  flex-wrap: wrap;
+  justify-content: center;
 }
