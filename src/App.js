@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import camera from './camera.png';
+import reel from './images/reel.ico';
 import './App.css';
 
 const omdbKey = process.env.REACT_APP_OMDB_API_KEY;
@@ -65,6 +66,7 @@ class App extends Component {
 
     return (
       <section>
+
         <div className="App">
           <header className="App-header">
             <img className="App-img" src={camera} alt="" />
@@ -74,15 +76,24 @@ class App extends Component {
 
         <form onSubmit={this.onSearchSubmit}>
           <div className="search-label">
-            <label style={{ search, padding: '200px' }}>
-            Search:
+            <label style={{ search, padding: '220px' }}>
+            Search:  |
               <input name="search"  
                 changeSearch={({ target }) => this.changeSearch(target.value)} />
+              <input className="submit" type="submit" value="Submit" />
             </label>
-            <input className="submit" type="submit" value="Submit" />
+          </div> 
+
+          <div className="reel">
+            <p> 
+              <img href="" src={reel} alt="" />
+              CLICK A POSTER TO SEE THE MOVIE'S SYNOPSIS
+            </p>
           </div>
         </form>
-        <img src={movies.poster} alt={movies.Title} />
+
+        {/* <img src={movies.poster} alt={movies.Title} /> */}
+
         <div>
           <div>{movies.length} {search}</div>
           {loading ? load : list}
