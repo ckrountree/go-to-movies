@@ -7,6 +7,8 @@ const omdbKey = process.env.REACT_APP_OMDB_API_KEY;
 class App extends Component {
   constructor() {
     super();
+    this.changeSearch = this.changeSearch.bind(this);
+    this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.state= {
       movies: [],
       search: 'Lady',
@@ -33,19 +35,30 @@ class App extends Component {
     });
   }
 
+  onSearchSubmit(event) {
+    event.preventDefault();
+    this.changeSearch(event.target.search.value);
+  }
+  // same as above but can take out the bind in the constructor...new way
+  // onSearchSubmit = event => {
+  //   event.preventDefault();
+  //   this.changeSearch(event.target.search.value);
+  // }
 
   render() {
     const { search, movies, loading } = this.state;
 
     const list = (
-      <ul>
-        {movies.map(film => (
-          <li key={film.imdbID}>
-            {`${film.Title} (${film.Year})`}
-            <img src={film.Poster} alt="" /> 
-          </li>
-        ))} 
-      </ul>
+      <div className="flexbox">
+        <ul>
+          {movies.map(film => (
+            <li key={film.imdbID}>
+              <h4>{`${film.Title} (${film.Year})`}</h4>
+              <img src={film.Poster} alt="" /> 
+            </li>
+          ))} 
+        </ul>
+      </div>
     );
 
     const load = <div>Loading...</div>;
@@ -59,15 +72,17 @@ class App extends Component {
           </header>
         </div>
 
-        <div>
-          <label style={{ search, padding: '250px', textAlign: 'center' }}>
+        <form onSubmit={this.onSearchSubmit}>
+          <div>
+            <label style={{ search, padding: '100px' }}>
             search:
-            <input name="search" value={search} 
-              changeSearch={({ target }) => this.changeSearch(target.value)} />
-          </label>
-        </div>
+              <input name="search"  
+                changeSearch={({ target }) => this.changeSearch(target.value)} />
+            </label>
+            <input type="submit" value="Submit" />
+          </div>
+        </form>
         <img src={movies.poster} alt={movies.Title} />
-
         <div>
           <div>{movies.length} {search}</div>
           {loading ? load : list}
