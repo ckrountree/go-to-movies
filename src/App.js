@@ -73,13 +73,13 @@ class App extends Component {
         </div>
 
         <form onSubmit={this.onSearchSubmit}>
-          <div>
-            <label style={{ search, padding: '100px' }}>
-            search:
+          <div className="search-label">
+            <label style={{ search, padding: '200px' }}>
+            Search:
               <input name="search"  
                 changeSearch={({ target }) => this.changeSearch(target.value)} />
             </label>
-            <input type="submit" value="Submit" />
+            <input className="submit" type="submit" value="Submit" />
           </div>
         </form>
         <img src={movies.poster} alt={movies.Title} />
