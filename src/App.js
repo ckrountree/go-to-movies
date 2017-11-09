@@ -1,23 +1,26 @@
 import React, { Component } from 'react';
-import camera from './camera.png';
+import camera from './images/camera.png';
 import reel from './images/reel.ico';
 import './App.css';
+// import Plot from './Plot';
 
 const omdbKey = process.env.REACT_APP_OMDB_API_KEY;
 
 class App extends Component {
   constructor() {
     super();
-    this.changeSearch = this.changeSearch.bind(this);
+    this.onChangeSearch = this.onChangeSearch.bind(this);
     this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.state= {
+      // plot: [],
       movies: [],
       search: 'Lady',
       loading: false
     };
   }
   componentDidMount() {
-    this.loadSearch(this.state.search); 
+    this.loadSearch(this.state.search);
+    // this.loadPlot(this.state.plot); 
   }
 
   async loadSearch(search) {
@@ -30,7 +33,7 @@ class App extends Component {
     });
   }
 
-  changeSearch(search) {
+  onChangeSearch(search) {
     this.setState({ search }, () => {
       this.loadSearch(search);
     });
@@ -38,12 +41,12 @@ class App extends Component {
 
   onSearchSubmit(event) {
     event.preventDefault();
-    this.changeSearch(event.target.search.value);
+    this.onChangeSearch(event.target.search.value);
   }
   // same as above but can take out the bind in the constructor...new way
   // onSearchSubmit = event => {
   //   event.preventDefault();
-  //   this.changeSearch(event.target.search.value);
+  //   this.onChangeSearch(event.target.search.value);
   // }
 
   render() {
@@ -79,7 +82,7 @@ class App extends Component {
             <label style={{ search, padding: '220px' }}>
             Search:  |
               <input name="search"  
-                changeSearch={({ target }) => this.changeSearch(target.value)} />
+                onChangeSearch={({ target }) => this.onChangeSearch(target.value)} />
               <input className="submit" type="submit" value="Submit" />
             </label>
           </div> 
@@ -91,8 +94,6 @@ class App extends Component {
             </p>
           </div>
         </form>
-
-        {/* <img src={movies.poster} alt={movies.Title} /> */}
 
         <div>
           <div>{movies.length} {search}</div>
