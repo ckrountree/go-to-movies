@@ -8,7 +8,7 @@
 
 .App-header {
   background-color: rgb(109, 108, 108);
-  height: 150px;
+  height: 200px;
   padding: 20px;
   color: white;
   border: 6px solid;
@@ -71,8 +71,23 @@ li {
   width: 5%;
 }
 
-.flexbox img {
-  height: 50%;
-  flex-wrap: wrap;
-  justify-content: center;
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: 50%
+}
+
+.wrapper img {
+  border: 4px double;
+  border-color: black;
+}
+
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.movies-found {
+  padding: 20px 0 20px 20px;
 }

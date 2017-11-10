@@ -14,7 +14,7 @@ class App extends Component {
     this.state= {
       // plot: [],
       movies: [],
-      search: 'Lady',
+      search: '',
       loading: false
     };
   }
@@ -28,7 +28,7 @@ class App extends Component {
     const response = await fetch(`http://www.omdbapi.com/?apikey=${omdbKey}&s=${search}`);
     const body = await response.json();
     this.setState({
-      movies: body.Search,
+      movies: body.Response === 'True' ? body.Search : [],
       loading: false
     });
   }
@@ -53,15 +53,14 @@ class App extends Component {
     const { search, movies, loading } = this.state;
 
     const list = (
-      <div className="flexbox">
-        <ul>
-          {movies.map(film => (
-            <li key={film.imdbID}>
-              <h4>{`${film.Title} (${film.Year})`}</h4>
-              <img src={film.Poster} alt="" /> 
-            </li>
-          ))} 
-        </ul>
+      <div className="wrapper">
+        {movies.map(film => (
+          <div key={film.imdbID}>
+            <h4>{`${film.Title} (${film.Year})`}</h4>
+            <h6>IMDB Link: <a href={'http://www.imdb.com/title/' + film.imdbID}>{film.Title} </a></h6>
+            <img src={film.Poster} alt="" /> 
+          </div>
+        ))} 
       </div>
     );
 
@@ -80,7 +79,7 @@ class App extends Component {
         <form onSubmit={this.onSearchSubmit}>
           <div className="search-label">
             <label style={{ search, padding: '220px' }}>
-            Search:  |
+            Search Title or Keyword:  |
               <input name="search"  
                 onChangeSearch={({ target }) => this.onChangeSearch(target.value)} />
               <input className="submit" type="submit" value="Submit" />
@@ -95,10 +94,10 @@ class App extends Component {
           </div>
         </form>
 
-        <div>
-          <div>{movies.length} {search}</div>
+        <div className="movies-found">
+          <div>Movies Found: {movies.length}</div>
           {loading ? load : list}
-        </div>
+        </div> 
 
       </section>
     );
