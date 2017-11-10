@@ -85,6 +85,7 @@ class App extends Component {
         <div className="movies-found">
           <div>Movies Found: {movies.length}</div>
           {loading ? load : list}
+          {!search ? <div>Enter a Movie to Start Your Search!</div> : null }
         </div> 
       </section>
     );
