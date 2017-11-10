@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import camera from './images/camera.png';
 import reel from './images/reel.ico';
 import './App.css';
+// import Plot from './Plot';
 
 const omdbKey = process.env.REACT_APP_OMDB_API_KEY;
 
@@ -11,6 +12,7 @@ class App extends Component {
     this.onChangeSearch = this.onChangeSearch.bind(this);
     this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.state= {
+      // plot: [],
       movies: [],
       search: '',
       loading: false
@@ -18,6 +20,7 @@ class App extends Component {
   }
   componentDidMount() {
     this.loadSearch(this.state.search);
+    // this.loadPlot(this.state.plot); 
   }
 
   async loadSearch(search) {
@@ -40,6 +43,11 @@ class App extends Component {
     event.preventDefault();
     this.onChangeSearch(event.target.search.value);
   }
+  // same as above but can take out the bind in the constructor...new way
+  // onSearchSubmit = event => {
+  //   event.preventDefault();
+  //   this.onChangeSearch(event.target.search.value);
+  // }
 
   render() {
     const { search, movies, loading } = this.state;
