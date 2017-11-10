@@ -60,14 +60,12 @@ class App extends Component {
 
     return (
       <section>
-
         <div className="App">
           <header className="App-header">
             <img className="App-img" src={camera} alt="" />
             <h1 className="App-title">Roll That Footage</h1>
           </header>
         </div>
-
         <form onSubmit={this.onSearchSubmit}>
           <div className="search-label">
             <label style={{ search, padding: '220px' }}>
@@ -77,7 +75,6 @@ class App extends Component {
               <input className="submit" type="submit" value="Submit" />
             </label>
           </div> 
-
           <div className="reel">
             <p> 
               <img href="" src={reel} alt="" />
@@ -85,12 +82,10 @@ class App extends Component {
             </p>
           </div>
         </form>
-
         <div className="movies-found">
           <div>Movies Found: {movies.length}</div>
           {loading ? load : list}
         </div> 
-
       </section>
     );
   }
