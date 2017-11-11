@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import camera from './images/camera.png';
-import reel from './images/reel.ico';
+import Search from './Search';
 import './App.css';
 
 const omdbKey = process.env.REACT_APP_OMDB_API_KEY;
@@ -66,22 +66,8 @@ class App extends Component {
             <h1 className="App-title">Roll That Footage</h1>
           </header>
         </div>
-        <form onSubmit={this.onSearchSubmit}>
-          <div className="search-label">
-            <label style={{ search, padding: '220px' }}>
-            Search Title or Keyword:  |
-              <input name="search"  
-                onChangeSearch={({ target }) => this.onChangeSearch(target.value)} />
-              <input className="submit" type="submit" value="Submit" />
-            </label>
-          </div> 
-          <div className="reel">
-            <p> 
-              <img href="" src={reel} alt="" />
-              CLICK A POSTER TO SEE THE MOVIE'S SYNOPSIS
-            </p>
-          </div>
-        </form>
+        <Search onSearch = {this.onSearchSubmit} 
+          search = {search} />
         <div className="movies-found">
           <div>Movies Found: {movies.length}</div>
           {loading ? load : list}
