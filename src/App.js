@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import camera from './images/camera.png';
 import Search from './Search';
+import { Movies } from './Movies';
 import './App.css';
 
 const omdbKey = process.env.REACT_APP_OMDB_API_KEY;
@@ -44,18 +45,6 @@ class App extends Component {
   render() {
     const { search, movies, loading } = this.state;
 
-    const list = (
-      <div className="wrapper">
-        {movies.map(film => (
-          <div key={film.imdbID}>
-            <h4>{`${film.Title} (${film.Year})`}</h4>
-            <h6>IMDB Link: <a href={'http://www.imdb.com/title/' + film.imdbID}>{film.Title} </a></h6>
-            <img src={film.Poster} alt="" /> 
-          </div>
-        ))} 
-      </div>
-    );
-
     const load = <div>Loading...</div>;
 
     return (
@@ -69,8 +58,7 @@ class App extends Component {
         <Search onSearch = {this.onSearchSubmit} 
           search = {search} />
         <div className="movies-found">
-          <div>Movies Found: {movies.length}</div>
-          {loading ? load : list}
+          {loading ? load : <Movies movies = {movies} />}
           {!search ? <div>Enter a Movie to Start Your Search!</div> : null }
         </div> 
       </section>
